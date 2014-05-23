@@ -21,6 +21,12 @@ module.exports = (robot) ->
     msg.send "Server time is: #{new Date()}"
 
   robot.respond /DIE$/i, (msg) ->
-    msg.send "Goodbye, cruel world."
-    process.exit 0
+    if robot.auth.hasRole(msg.envelope.user,'admin')
+      msg.send "Goodbye, cruel world."
+      settimeout () ->
+        process.exit 0
+      , 0
+    else
+      msg.send "No, you can't kill me."
+      msg.send JSON.stringify(msg.envelope.user)
 
