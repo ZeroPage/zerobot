@@ -1,1 +1,1 @@
-web: bin/hubot -a slack -n zerobot
+web: bin/hubot -a slack
