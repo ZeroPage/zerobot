@@ -1,3 +1,10 @@
+# Commands:
+#   hubot google <words> - Google Search
+#   hubot reigveda <words> - Search in reigveda wiki
+#   hubot naver <words> - Search in Naver
+#   hubot ifl <words> - I feel lucky.
+#   hubot timer <ms> - set timer
+
 module.exports = (robot) ->
   robot.respond /google (.*)/i, (msg) ->
     searchword = msg.match[1]
@@ -20,7 +27,7 @@ module.exports = (robot) ->
   robot.respond /naver (.*)/i, (msg) ->
     searchword = msg.match[1]
     searchword = searchword.replace(/\s/g, "+")
-    url = "http://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&ie=utf8&query=" 
+    url = "http://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&ie=utf8&query="
     + searchword
     msg.send url
 
@@ -28,7 +35,7 @@ module.exports = (robot) ->
     searchword = msg.match[1]
     query = v: '1.0', rsz: '1', q: searchword, safe: 'active'
     msg.http('http://ajax.googleapis.com/ajax/services/search/web')
-        .query(query).get() (err, res, body) -> 
+        .query(query).get() (err, res, body) ->
             result = JSON.parse(body)
             result = result.responseData?.results
             if result?
