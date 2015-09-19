@@ -15,21 +15,17 @@ module.exports = function(robot){
 
     robot.http(address)
     .header("Content-Type", "application/x-www-form-urlencoded")
-    .post(function(err, req){
-        if(err) {
-          res.send("something's wrong");
-          return;
-        }
-        req.end("id=" + id);
-      })(function(err, resp, body){
+    .post("id="+id)(function(err, resp, body){
       if(err) {
         res.send("에러났다.");
+        console.log(err);
         return;
       }
       if(body === "Ok"){
         res.send("열렸다.");
       } else {
         res.send("열린.... 건가?");
+        console.log(body);
       }
     });
     res.send("열어는 드릴께");
