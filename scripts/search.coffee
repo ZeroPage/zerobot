@@ -12,10 +12,10 @@ module.exports = (robot) ->
     url = "https://www.google.co.kr/#newwindow=1&q=" + searchword
     msg.send url
 
-  robot.respond /rigveda (.*)/i, (msg) ->
+  robot.respond /namu (.*)/i, (msg) ->
     searchword = msg.match[1]
     searchword = searchword.replace(/\s/g, "%20")
-    url = "http://rigvedawiki.net/r1/wiki.php/" + searchword
+    url = "https://namu.wiki/w/" + searchword
     msg.send url
 
   robot.respond /wiki (.*)/i, (msg) ->
