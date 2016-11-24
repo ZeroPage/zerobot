@@ -24,7 +24,7 @@ module.exports = function(robot){
   function otp(res){
     var token = generateToken();
     var name = res.envelope.user.name;
-    robot.messageRoom(name, "Your token is <" + token + ">. It will be invalid in " + timeout + " seconds.");
+    robot.messageRoom("@"+name, "Your token is <" + token + ">. It will be invalid in " + timeout + " seconds.");
     robot.brain.set(name + ".otp", token);
 
     setTimeout(function(){

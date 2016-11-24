@@ -1,6 +1,6 @@
 # Commands:
 #   hubot google <words> - Google Search
-#   hubot rigveda <words> - Search in rigveda wiki
+#   hubot namu <words> - Search in rigveda wiki
 #   hubot naver <words> - Search in Naver
 #   hubot ifl <words> - I feel lucky.
 #   hubot timer <ms> - set timer
