@@ -1,18 +1,17 @@
 // Description:
 //   Overwatch pick bot. only work in overwatch channel
 // Commands:
-//   pick (only work in overwatch channel)
-//   픽 (only work in overwatch channel)
+//   랜픽 (only work in overwatch channel)
 //   픽좀 (only work in overwatch channel)
-//   픽 좀 (only work in overwatch channel)
 //
 var words = [
-  /pick/i, /픽좀/i, /픽/i, /픽 좀/i
+  /픽좀/i, /랜픽/i
 ];
 
 var hero = [
   {
     name: "겐지",
+    icon: ":overwatch_genji:",
     scripts: [
       "겐지가 함께 한다.",
       "~류승룡기모찌!!~ 류진노 켄오 쿠라에~!! (竜神の剣を喰らえ！)",
@@ -31,7 +30,7 @@ var hero = [
   },
   {
     name: "맥크리",
-    icon : ":overwatch_mccree:",
+    icon: ":overwatch_mccree:",
     scripts: [
       "내 이름은 맥크리!!",
       "서두를 거 없잖아?",
@@ -69,7 +68,7 @@ var hero = [
   {
     name: "메이",
     icon: ":overwatch_mei:",
-    scripts : [
+    scripts: [
       "똑똑, 메이가 왔어요~!",
       "우리 세계는 지킬 가치가 있어요.",
       "똥주!! 뿌 쒼 쒀!!! (冻住, 不许走!)",
@@ -86,7 +85,7 @@ var hero = [
     ]
   },
   {
-    name : "위도우메이커",
+    name: "위도우메이커",
     scripts: [
       "여긴 위도우메이커!",
       "아무도 내게서 숨진 못해",
@@ -114,6 +113,7 @@ var hero = [
   },
   {
     name: "한조",
+    icon: ":overwatch_hanzo:",
     scripts: [
       "한조, 대기 중.",
       "죽음에는 명예가 따르고, 명예에는 구원이 따른다",
@@ -123,6 +123,7 @@ var hero = [
   },
   {
     name: "D.Va",
+    icon: ":overwatch_songhana:",
     scripts: [
       "게임을 하면 이겨야지!",
       "이것도 너프해 보시지!!!!",
@@ -141,7 +142,8 @@ var hero = [
   },
   {
     name: "로드호그",
-    scripts:[
+    icon: ":overwatch_roadhog:",
+    scripts: [
       "나는 재앙을 불러온다.",
       "로드호그의 시간이다.",
       "돼~재앙이 준비됐다!",
@@ -149,7 +151,7 @@ var hero = [
     ]
   },
   {
-    name : "윈스턴",
+    name: "윈스턴",
     scripts: [
       "오 안녕하세요",
       "윈스턴 보고합니다!",
@@ -160,7 +162,8 @@ var hero = [
   },
   {
     name: "자리야",
-    scripts :[
+    icon: ":overwatch_zarya:",
+    scripts: [
       "함께일 때, 우린 강합니다.",
       "자리야, 임무 대기 중.",
       "아곤! 빠가똥!! (Огонь по готовности!)",
@@ -169,15 +172,18 @@ var hero = [
   },
   {
     name: "루시우",
+    icon: ":overwatch_lucio:",
     scripts: [
       "힘내, 우린 할 수 있어!",
       "하하! 음악의 치유사!",
       "볼륨 최대로!",
-      "오우! 제대로 놀아보자~!!!!!"
+      "오우! 제대로 놀아보자~!!!!!",
+      "루시우가 여러분을 찾아갑니다!!"
     ]
   },
   {
-    name : "메르시",
+    name: "메르시",
+    icon: ":overwatch_mercy:",
     scripts: [
       "내 시종은 죽지 않아요",
       "제가 여러분을 돌보겠어요",
@@ -188,6 +194,7 @@ var hero = [
   },
   {
     name: "시메트라",
+    icon: ":overwatch_symmetra:",
     scripts: [
       "인류의 진정한 적은 무질서에요",
       "시메트라, 보고합니다.",
@@ -196,7 +203,8 @@ var hero = [
     ]
   },
   {
-    name : "아나",
+    name: "아나",
+    icon: ":overwatch_ana:",
     scripts: [
       "신념을 위한 싸움을 멈추지 마라.",
       "넌 강해졌다. 돌격해!",
@@ -216,7 +224,7 @@ var hero = [
   },
   {
     name: "솜브라",
-    scripts:[
+    scripts: [
       "무엇이든... 누구든 해킹할 수 있어.",
       "항상 백도어는 남겨둬야지.",
       "¡Apagando las luces!",
@@ -228,22 +236,23 @@ var hero = [
   }
 ];
 
-module.exports = function(robot){
-  words.forEach(function(word){
+module.exports = function(robot) {
+  words.forEach(function(word) {
     robot.hear(word, pick);
   });
-  function pick(res){
+
+  function pick(res) {
     var room = robot.adapter.client.rtm.dataStore.getChannelById(res.message.room)
 
     if (!room || room.name == "overwatch") {
       var index = rindex(hero);
       var scriptNum = rindex(hero[index].scripts)
 
-      console.log(index, "/",scriptNum,"/", hero[index]);
+      console.log(index, "/", scriptNum, "/", hero[index]);
 
       var text = "";
       text += hero[index].icon ? hero[index].icon : "";
-      text += "["+hero[index].name+"] ";
+      text += "[" + hero[index].name + "] ";
       text += hero[index].scripts[scriptNum];
 
       res.reply(text);
@@ -251,6 +260,6 @@ module.exports = function(robot){
   }
 }
 
-function rindex(arr){
+function rindex(arr) {
   return Math.floor(Math.random() * arr.length)
 }
