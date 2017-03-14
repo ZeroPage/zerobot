@@ -1,5 +1,5 @@
 // Description:
-//   Overwatch pick bot. only work in overwatch channel
+//   Overwatch pick bot. only work in overwatch(or $OVERWATCH_CHANNEL_NAME) channel
 // Commands:
 //   랜픽 (only work in overwatch channel)
 //   픽좀 (only work in overwatch channel)
@@ -7,6 +7,7 @@
 var words = [
   /픽좀/i, /랜픽/i
 ];
+var channelName = process.env.OVERWATCH_CHANNEL_NAME || "overwatch";
 
 var hero = [
   {
@@ -244,11 +245,9 @@ module.exports = function(robot) {
   function pick(res) {
     var room = robot.adapter.client.rtm.dataStore.getChannelById(res.message.room)
 
-    if (!room || room.name == "overwatch") {
+    if (!room || room.name == channelName) {
       var index = rindex(hero);
       var scriptNum = rindex(hero[index].scripts)
-
-      console.log(index, "/", scriptNum, "/", hero[index]);
 
       var text = "";
       text += hero[index].icon ? hero[index].icon : "";
